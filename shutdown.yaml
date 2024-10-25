@@ -1,0 +1,9 @@
+---
+- name: Shutdown Ubuntu instances only
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Shut down the instance if it's running Ubuntu
+      ansible.builtin.shell: "sudo shutdown now"
+      when: ansible_facts['ansible_os_family'] == 'Debian' and ansible_facts['ansible_distribution'] == 'Ubuntu'
+      become: yes
